@@ -11,17 +11,20 @@ import App from './components/App';
 import {ResultsContainer} from './components/Results';
 import {setState} from './action_creators';
 
-const createStoreWithMiddleware = applyMiddleware(
-  remoteActionMiddleware
-)(createStore);
-
-const store = createStoreWithMiddleware(reducer);
-
 
 const socket = io(`${location.protocol}//${location.hostname}:8090`);
 socket.on('state', state =>
   store.dispatch(setState(state))
 );
+
+const createStoreWithMiddleware = applyMiddleware(
+  remoteActionMiddleware(socket)
+)(createStore);
+
+const store = createStoreWithMiddleware(reducer);
+
+
+
 
 
 
