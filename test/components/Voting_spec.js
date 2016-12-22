@@ -23,7 +23,7 @@ describe('Voting', () => {
   });
 
   it('invokes callback when a button is clicked', () => {
-    let votedWith;
+    let votedWith = "Trainspotting";
     const vote = (entry) => votedWith = entry;
 
     const component = renderIntoDocument(
